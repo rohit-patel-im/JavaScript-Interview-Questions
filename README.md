@@ -66,6 +66,8 @@
 
 - What is event emitter
 
+- What is typeof in javascript
+
 - What is the output of this snippet
   x = 5;
   console.log(x);
@@ -116,3 +118,11 @@
 Example : 
 //input = ABCDEFGHIJK
 //output = ABDCEFHGIJK
+
+- Write a function for this and count each string occurrence
+ var string = my name is Rohit;
+ 
+- Call a API in plain js file and impliment list of record in html file
+
+ 
+
