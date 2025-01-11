@@ -1887,10 +1887,10 @@ This is a simple example of swapping two variables using array destructuring in 
     ```javascript 
     a = 5; 
     var a; 
-    console.log(a); 
+    console.log(a); //5
     ``` 
     **Answer:** 
-    ``` 5 ``` **Explanation:** Due to **hoisting**, the `var` declaration is moved to the top, so the value of `a` is 5 when logged. 
+     5  **Explanation:** Due to **hoisting**, the `var` declaration is moved to the top, so the value of `a` is 5 when logged. 
 </details>
 <details> <summary><strong>8. What will be the output of the following code?</strong></summary> ```javascript a = 5; let a; console.log(a); ``` **Answer:** ``` Cannot access 'a' before initialization ``` **Explanation:** Since `let` is block-scoped and does not hoist its value, it causes a `ReferenceError` when accessed before its initialization. </details>
 <details> <summary><strong>9. What will be the output of the following code?</strong></summary> ```javascript const obj1 = {name: "Ramesh", age: 24}; const obj2 = obj1; obj2.name = 'Praveen'; console.log(obj1); ``` **Answer:** ``` {name: 'Praveen', age: 24} ``` **Explanation:** In JavaScript, objects are reference types, so modifying `obj2` will also affect `obj1` because they refer to the same object. </details>
