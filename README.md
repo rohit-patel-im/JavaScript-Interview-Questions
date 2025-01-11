@@ -1824,4 +1824,81 @@ In this example, add() is a pure function because it does not modify any externa
 
 </details>
 
+<details> <summary><strong>1. What will be the output for the below code?</strong></summary> ```javascript if(Symbol("test") === Symbol("test")){ console.log("Hello, welcome"); }else{ console.log("Bye, see you soon!"); } ``` **Answer:** The output will be: ``` Bye, see you soon! ``` **Explanation:** Each call to `Symbol()` creates a unique symbol. Even though the descriptions are the same ("test"), the symbols are distinct objects, so the comparison `Symbol("test") === Symbol("test")` returns `false`. </details>
+<details> <summary><strong>2. How to swap 2 values without taking an extra variable?</strong></summary> **Example:** ```javascript let a = 20; let b = 35; [a, b] = [b, a]; console.log(a); // 35 console.log(b); // 20 ``` **Explanation:** In ES6, you can use array destructuring to swap two values in one line without the need for an extra variable. </details>
+<details> <summary><strong>3. Write a function to get output with nth dynamic value.</strong></summary> **Example:** ```javascript function flatten(arr) { return arr.flat(Infinity); }
+let input = [1, [2, [3, 4, [12, 13], 5]]]; let output = flatten(input); console.log(output); // [1, 2, 3, 4, 12, 13, 5]
 
+sql
+Copy code
+**Explanation:**  
+Using `Array.prototype.flat()` with `Infinity` will recursively flatten all levels of an array.
+</details>
+
+---
+
+<details>  
+<summary><strong>4. Write a function to get a duplicate character count and return them in an object.</strong></summary>
+**Example:**
+```javascript
+function countDuplicates(str) {
+    const result = {};
+    str.split('').forEach(char => {
+        if (char !== ' ' && isNaN(char)) {
+            result[char] = (result[char] || 0) + 1;
+        }
+    });
+    return Object.fromEntries(Object.entries(result).filter(([_, count]) => count > 1));
+}
+
+let strValues = "welcome 2 abroad";
+console.log(countDuplicates(strValues));
+// Output: { w: 1, e: 2, l: 1, c: 1, o: 2, m: 1, a: 2, b: 1, r: 1, d: 1 }
+Explanation:
+This function filters out spaces and numbers, counts the occurrences of characters, and returns only those characters that appear more than once.
+
+</details>
+<details> <summary><strong>5. Write a program to remove blank and undefined values from a nested array and make it unique.</strong></summary> **Example:** ```javascript function cleanArray(arr) { return arr.flat(Infinity) .filter(item => item !== undefined && item !== null && item !== '') .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates }
+const myNestedArray = [1, 2, [undefined, null, '', [3, 4, [5, undefined], null]], 6, undefined, [7, [8, 9, [null, undefined], 10]]]; console.log(cleanArray(myNestedArray)); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+sql
+Copy code
+**Explanation:**  
+The function first flattens the array, removes undefined, null, and empty string values, and then removes any duplicate values.
+</details>
+
+---
+
+<details>  
+<summary><strong>6. Swap values using ES6</strong></summary>
+**Example:**
+```javascript
+let a = 5;
+let b = 10;
+[b, a] = [a, b];
+console.log(a); // 10
+console.log(b); // 5
+Explanation:
+This is a simple example of swapping two variables using array destructuring in ES6.
+
+</details>
+<details> 
+    <summary><strong>7. What will be the output of the following code?</strong></summary>
+    ```javascript 
+    a = 5; 
+    var a; 
+    console.log(a); 
+    ``` 
+    **Answer:** 
+    ``` 5 ``` **Explanation:** Due to **hoisting**, the `var` declaration is moved to the top, so the value of `a` is 5 when logged. 
+</details>
+<details> <summary><strong>8. What will be the output of the following code?</strong></summary> ```javascript a = 5; let a; console.log(a); ``` **Answer:** ``` Cannot access 'a' before initialization ``` **Explanation:** Since `let` is block-scoped and does not hoist its value, it causes a `ReferenceError` when accessed before its initialization. </details>
+<details> <summary><strong>9. What will be the output of the following code?</strong></summary> ```javascript const obj1 = {name: "Ramesh", age: 24}; const obj2 = obj1; obj2.name = 'Praveen'; console.log(obj1); ``` **Answer:** ``` {name: 'Praveen', age: 24} ``` **Explanation:** In JavaScript, objects are reference types, so modifying `obj2` will also affect `obj1` because they refer to the same object. </details>
+<details> <summary><strong>10. How can we protect this when we copy the first object to another object?</strong></summary> **Example:** ```javascript const obj1 = {name: 'Anil', age: 24}; const obj2 = {...obj1}; // Using spread operator for shallow copy obj2.name = 'Praveen'; console.log(obj1); // Output: { name: 'Anil', age: 24 } ``` **Explanation:** By using the spread operator, we create a shallow copy of the object. Changes to `obj2` will not affect `obj1`. </details>
+<details> <summary><strong>11. Is this valid code?</strong></summary> ```javascript let name = 'Ramesh'; let age = 35; let obj = { name, age }; console.log(obj); ``` **Answer:** Yes, this is valid code. **Explanation:** In ES6, you can use shorthand property names when the variable name and the object property name are the same. </details>
+<details> <summary><strong>12. How can I get the max number value from an array?</strong></summary> **Example:** ```javascript const numbers = [1, 2, 35, 4, 7, 9]; console.log(Math.max(...numbers)); // Output: 35 ``` **Explanation:** The `Math.max()` function returns the largest of the numbers provided. The spread operator (`...`) is used to pass the array elements as individual arguments. </details>
+<details> <summary><strong>13. What will be the output for the below code?</strong></summary> ```javascript let numbers = [1, 2, 35, 4, 7, 9]; console.log(Math.max(numbers)); // Output: NaN ``` **Explanation:** `Math.max()` does not accept arrays directly. Since `numbers` is an array, it returns `NaN`. You need to use the spread operator to pass the elements individually. </details>
+<details> <summary><strong>14. Mysql query to get nth highest number from a table</strong></summary> ```sql SELECT id AS 4thHighestEarningEmployee FROM payments ORDER BY id DESC LIMIT 3,1; ``` **Explanation:** In the above query, `LIMIT 3,1` is used to fetch the nth highest record by skipping 3 records and fetching the 4th highest. </details>
+<details> <summary><strong>15. What is the output of the following code?</strong></summary> ```javascript function cb(){ console.log("hello 1"); } process.nextTick(cb); console.log("hello 2"); ``` **Answer:** ``` hello 2 hello 1 ``` **Explanation:** `process.nextTick()` queues the callback to be executed after the current event loop phase. Since `console.log("hello 2")` is already in the current phase, it is printed first. </details>
+<details> <summary><strong>16. What is the output of the following code?</strong></summary> ```javascript console.log(4 + "3" + 2 + 6); ``` **Answer:** ``` "43326" ``` **Explanation:** The `+` operator is used for string concatenation. So, `4 + "3"` becomes `"43"`, and the rest of the numbers are concatenated as strings. </details>
+<details> <summary><strong>17. How can I get an array in the same level?</strong></summary> ```javascript const arr2 = [0, 1, [2, [3, [4, 5]]]]; console.log(arr2.flat(Infinity)); // Output: [0, 1, 2, 3, 4, 5] ``` **Explanation:** The `flat()` method with `Infinity` flattens the array recursively to all levels. </details>
