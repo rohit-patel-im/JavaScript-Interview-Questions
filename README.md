@@ -1153,3 +1153,675 @@ const arr = [1, 2, 3, 4, 5];
 arr.splice(2, 2, 6, 7);  // Removes 2 elements and adds 6, 7
 console.log(arr); // Output: [1, 2, 6, 7, 5]
 </details>
+<details> <summary><strong>71. What is the `setTimeout()` function in JavaScript?</strong></summary> The **setTimeout()** function is used to execute a specified function or code after a delay in milliseconds.
+Example:
+
+javascript
+Copy code
+setTimeout(() => {
+    console.log('This message appears after 2 seconds');
+}, 2000);
+In this example, the message will appear after 2 seconds.
+
+Note: The setTimeout function returns a unique ID that can be used with clearTimeout() to cancel the timeout.
+
+</details>
+<details> <summary><strong>72. What is the `setInterval()` function in JavaScript?</strong></summary> The **setInterval()** function calls a specified function repeatedly with a fixed time delay between each call.
+Example:
+
+javascript
+Copy code
+let count = 0;
+const intervalId = setInterval(() => {
+    console.log('This message appears every 2 seconds');
+    count++;
+    if (count === 3) {
+        clearInterval(intervalId); // Stops after 3 messages
+    }
+}, 2000);
+In this example, the message will be printed every 2 seconds, and it will stop after 3 messages.
+
+</details>
+<details> <summary><strong>73. What is a "pure function" in JavaScript?</strong></summary> A **pure function** is a function that always produces the same output for the same input and has no side effects (does not modify any external state).
+Example:
+
+javascript
+Copy code
+function add(a, b) {
+    return a + b;  // No side effects, same output for same inputs
+}
+In contrast, an impure function might modify a global variable or rely on outside states.
+
+</details>
+<details> <summary><strong>74. What is the `bind()` method in JavaScript?</strong></summary> The **bind()** method creates a new function that, when invoked, has its `this` keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+Example:
+
+javascript
+Copy code
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log('Hello, ' + this.name);
+    }
+};
+
+const greetAlice = person.greet.bind(person);
+greetAlice(); // Output: Hello, Alice
+In this example, the greet() function is bound to the person object, ensuring the correct this value when called.
+
+</details>
+<details> <summary><strong>75. What is the `call()` method in JavaScript?</strong></summary> The **call()** method is used to call a function with a specific `this` value and individual arguments. It’s similar to `bind()`, but `call()` invokes the function immediately.
+Example:
+
+javascript
+Copy code
+function greet() {
+    console.log('Hello, ' + this.name);
+}
+
+const person = { name: 'Alice' };
+greet.call(person); // Output: Hello, Alice
+In this example, greet() is called immediately with person as its this value.
+
+</details>
+<details> <summary><strong>76. What is the `apply()` method in JavaScript?</strong></summary> The **apply()** method is similar to `call()`, but instead of passing individual arguments, an array or array-like object of arguments is passed.
+Example:
+
+javascript
+Copy code
+function greet(greeting) {
+    console.log(greeting + ', ' + this.name);
+}
+
+const person = { name: 'Alice' };
+greet.apply(person, ['Hello']); // Output: Hello, Alice
+In this example, greet() is invoked with an array as its argument, using apply() to pass the person object as this.
+
+</details>
+<details> <summary><strong>77. What is the difference between `call()` and `apply()` in JavaScript?</strong></summary> The **`call()`** and **`apply()`** methods are similar in that they allow you to invoke a function with a specific `this` value, but they differ in how arguments are passed. - **`call()`** passes arguments individually. - **`apply()`** passes arguments as an array or array-like object.
+Example using call():
+
+javascript
+Copy code
+function greet(greeting) {
+    console.log(greeting + ', ' + this.name);
+}
+const person = { name: 'Alice' };
+greet.call(person, 'Hello');
+Example using apply():
+
+javascript
+Copy code
+greet.apply(person, ['Hello']);
+Both examples will output the same result: Hello, Alice
+
+</details>
+<details> <summary><strong>78. What is a "closure" in JavaScript?</strong></summary> A **closure** is a function that remembers and can access its lexical scope (the scope in which it was defined) even when the function is executed outside that scope. This allows the function to "close over" its environment.
+Example:
+
+javascript
+Copy code
+function outer() {
+    let count = 0;
+    return function inner() {
+        count++;
+        console.log(count);
+    };
+}
+
+const counter = outer();
+counter(); // Output: 1
+counter(); // Output: 2
+In this example, the inner() function retains access to the count variable from the outer() function even after outer() has finished executing.
+
+</details>
+<details> <summary><strong>79. What is hoisting in JavaScript?</strong></summary> **Hoisting** is JavaScript's default behavior of moving declarations (variable and function declarations) to the top of their containing scope before code execution. However, only the declarations are hoisted, not the initializations.
+Example with variables:
+
+javascript
+Copy code
+console.log(x); // Output: undefined
+var x = 5;
+console.log(x); // Output: 5
+Example with functions:
+
+javascript
+Copy code
+foo(); // Output: "Hello"
+function foo() {
+    console.log("Hello");
+}
+In the second example, the function declaration is hoisted, so foo() can be called before it appears in the code.
+
+</details>
+<details> <summary><strong>80. What is the `this` keyword in JavaScript?</strong></summary> The **`this`** keyword refers to the context in which a function is executed. It represents the object that is executing the current piece of code.
+Example with an object method:
+
+javascript
+Copy code
+const person = {
+    name: 'Alice',
+    greet: function() {
+        console.log('Hello, ' + this.name);
+    }
+};
+
+person.greet(); // Output: Hello, Alice
+In this example, this refers to the person object inside the greet method.
+
+</details>
+<details> <summary><strong>81. What are arrow functions in JavaScript?</strong></summary> Arrow functions provide a concise syntax for writing functions. They also bind the `this` keyword lexically, meaning that the `this` value inside an arrow function is inherited from the outer scope.
+Example:
+
+javascript
+Copy code
+const add = (a, b) => a + b;
+console.log(add(3, 5)); // Output: 8
+Example with this:
+
+javascript
+Copy code
+const person = {
+    name: 'Alice',
+    greet: function() {
+        setTimeout(() => {
+            console.log('Hello, ' + this.name);
+        }, 1000);
+    }
+};
+
+person.greet(); // Output: Hello, Alice
+In this example, the this inside the arrow function refers to the person object, whereas a regular function would have its own this context.
+
+</details>
+
+details> <summary><strong>82. What is the `find()` method in JavaScript?</strong></summary> The **`find()`** method returns the first element in an array that satisfies the provided testing function. If no elements are found, it returns `undefined`.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4, 5];
+const result = numbers.find(num => num > 3);
+console.log(result); // Output: 4
+In this example, the find() method returns the first number greater than 3.
+
+</details>
+<details> <summary><strong>83. What is the `filter()` method in JavaScript?</strong></summary> The **`filter()`** method creates a new array with all elements that pass the test implemented by the provided function.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4, 5];
+const result = numbers.filter(num => num % 2 === 0);
+console.log(result); // Output: [2, 4]
+In this example, the filter() method returns an array containing only the even numbers from the original array.
+
+</details>
+<details> <summary><strong>84. What is the `map()` method in JavaScript?</strong></summary> The **`map()`** method creates a new array populated with the results of calling a provided function on every element in the calling array.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // Output: [2, 4, 6, 8]
+In this example, the map() method creates a new array with the numbers doubled.
+
+</details>
+<details> <summary><strong>85. What is the `reduce()` method in JavaScript?</strong></summary> The **`reduce()`** method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // Output: 10
+In this example, the reduce() method sums up all the numbers in the array.
+
+</details>
+<details> <summary><strong>86. What is the `reduceRight()` method in JavaScript?</strong></summary> The **`reduceRight()`** method works the same as `reduce()`, but it processes the array elements from right to left.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduceRight((acc, num) => acc + num, 0);
+console.log(sum); // Output: 10
+In this example, the array is reduced from the right to left, but the result remains the same as reduce() in this case.
+
+</details>
+<details> <summary><strong>87. What is `Object.freeze()` in JavaScript?</strong></summary> The **`Object.freeze()`** method freezes an object, preventing new properties from being added, and existing properties from being modified or deleted.
+Example:
+
+javascript
+Copy code
+const person = {
+    name: 'Alice',
+    age: 25
+};
+
+Object.freeze(person);
+
+person.age = 26; // Won't work because the object is frozen
+console.log(person.age); // Output: 25
+In this example, the object person is frozen, and attempts to change its properties fail.
+
+</details>
+<details> <summary><strong>88. What is `Object.seal()` in JavaScript?</strong></summary> The **`Object.seal()`** method seals an object, meaning you cannot add or delete properties, but you can still modify the values of existing properties.
+Example:
+
+javascript
+Copy code
+const person = {
+    name: 'Alice',
+    age: 25
+};
+
+Object.seal(person);
+
+person.age = 26; // Works because the object is sealed but not frozen
+delete person.name; // Won't work because properties cannot be deleted
+console.log(person); // Output: { name: 'Alice', age: 26 }
+In this example, the object person is sealed, so we can modify its properties, but we cannot delete them or add new ones.
+
+</details>
+<details> <summary><strong>89. What is the `typeof` operator in JavaScript?</strong></summary> The **`typeof`** operator is used to determine the data type of a variable or an expression.
+Example:
+
+javascript
+Copy code
+let x = 5;
+console.log(typeof x); // Output: 'number'
+
+let y = 'Hello';
+console.log(typeof y); // Output: 'string'
+
+let z = true;
+console.log(typeof z); // Output: 'boolean'
+In this example, typeof returns the data type of each variable.
+
+</details>
+<details> <summary><strong>90. What is a "callback function" in JavaScript?</strong></summary> A **callback function** is a function that is passed as an argument to another function and is executed after a certain task is completed.
+Example:
+
+javascript
+Copy code
+function greet(name, callback) {
+    console.log('Hello, ' + name);
+    callback(); // Call the callback function after greeting
+}
+
+function farewell() {
+    console.log('Goodbye!');
+}
+
+greet('Alice', farewell);
+// Output:
+// Hello, Alice
+// Goodbye!
+In this example, the farewell function is passed as a callback and executed after greet finishes logging the greeting.
+
+</details>
+<details> <summary><strong>91. What is an "Immediately Invoked Function Expression" (IIFE)?</strong></summary> An **IIFE** is a function that is defined and executed immediately after its declaration. It is often used to create a new scope and avoid polluting the global scope.
+Example:
+
+javascript
+Copy code
+(function() {
+    let message = 'Hello, world!';
+    console.log(message);
+})(); // Output: Hello, world!
+In this example, the function is executed immediately after it is defined, and the variable message is scoped within the IIFE.
+
+</details>
+<details> <summary><strong>92. What is the difference between `Object.create()` and the `new` keyword in JavaScript?</strong></summary> - **`Object.create()`** creates a new object with the specified prototype object and properties. - **`new`** creates a new instance of a constructor function and sets up the inheritance chain using the function's prototype.
+Example using Object.create():
+
+javascript
+Copy code
+const animal = {
+    speak() {
+        console.log('Animal speaks');
+    }
+};
+
+const dog = Object.create(animal);
+dog.speak(); // Output: Animal speaks
+Example using new:
+
+javascript
+Copy code
+function Animal() {}
+Animal.prototype.speak = function() {
+    console.log('Animal speaks');
+};
+
+const dog = new Animal();
+dog.speak(); // Output: Animal speaks
+Both methods can be used to create new objects, but Object.create() directly sets up the prototype chain, while new also handles the construction process.
+
+</details>
+<details> <summary><strong>93. What is the `super()` keyword in JavaScript?</strong></summary> The **`super()`** keyword is used to call functions on an object's parent class (in the case of inheritance). It must be called in the constructor of a subclass.
+Example:
+
+javascript
+Copy code
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+
+    speak() {
+        console.log(`${this.name} makes a sound`);
+    }
+}
+
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name); // Calls the parent class constructor
+        this.breed = breed;
+    }
+
+    speak() {
+        super.speak(); // Calls the parent class method
+        console.log(`${this.name} barks`);
+    }
+}
+
+const dog = new Dog('Buddy', 'Golden Retriever');
+dog.speak(); 
+// Output:
+// Buddy makes a sound
+// Buddy barks
+In this example, super() is used to call the constructor and methods of the parent class Animal from the Dog subclass.
+
+</details>
+<details> <summary><strong>94. What is the `get` method in JavaScript?</strong></summary> The **`get`** method is a special method used to define a getter property on an object. It allows you to access the value of a property as if it were a simple field.
+Example:
+
+javascript
+Copy code
+const person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    
+    get fullName() {
+        return this.firstName + ' ' + this.lastName;
+    }
+};
+
+console.log(person.fullName); // Output: John Doe
+In this example, fullName is a getter property that concatenates firstName and lastName when accessed.
+
+</details>
+<details> <summary><strong>95. What is the `set` method in JavaScript?</strong></summary> The **`set`** method is a special method used to define a setter property on an object. It allows you to assign a value to a property using a function.
+Example:
+
+javascript
+Copy code
+const person = {
+    firstName: 'John',
+    lastName: 'Doe',
+
+    set fullName(name) {
+        const [firstName, lastName] = name.split(' ');
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+};
+
+person.fullName = 'Jane Smith';
+console.log(person.firstName); // Output: Jane
+console.log(person.lastName);  // Output: Smith
+In this example, fullName is a setter property that allows setting both firstName and lastName by splitting the input string.
+
+</details>
+<details> <summary><strong>96. What is the purpose of the `finally` block in JavaScript?</strong></summary> The **`finally`** block is used in conjunction with `try` and `catch`. It is always executed after the `try` and `catch` blocks, regardless of whether an exception was thrown or not. It is commonly used to clean up resources or finalize operations.
+Example:
+
+javascript
+Copy code
+try {
+    let result = 10 / 0;
+    console.log(result); // Output: Infinity
+} catch (error) {
+    console.log('Error occurred');
+} finally {
+    console.log('This will always be executed');
+}
+// Output:
+// This will always be executed
+In this example, the finally block executes even if there was no error.
+
+</details>
+<details> <summary><strong>97. What is the `new.target` in JavaScript?</strong></summary> The **`new.target`** refers to the constructor that was invoked when using the `new` keyword. It is useful inside a constructor to determine if it was called with `new`.
+Example:
+
+javascript
+Copy code
+function MyConstructor() {
+    if (!new.target) {
+        console.log('Constructor must be called with new');
+    } else {
+        console.log('Constructor called with new');
+    }
+}
+
+MyConstructor(); // Output: Constructor must be called with new
+new MyConstructor(); // Output: Constructor called with new
+In this example, new.target helps us check whether the constructor was called with new.
+
+</details>
+<details> <summary><strong>98. What is the `for...of` loop in JavaScript?</strong></summary> The **`for...of`** loop is used to iterate over iterable objects like arrays, strings, maps, and more. It gives direct access to the values of the iterable.
+Example:
+
+javascript
+Copy code
+const numbers = [10, 20, 30];
+
+for (const num of numbers) {
+    console.log(num);
+}
+// Output:
+// 10
+// 20
+// 30
+In this example, for...of is used to iterate through the array and print each number.
+
+</details>
+<details> <summary><strong>99. What is the `Symbol.iterator` in JavaScript?</strong></summary> The **`Symbol.iterator`** is a built-in symbol that defines the default iterator for an object. Objects that have this symbol can be iterated over with `for...of` loops.
+Example:
+
+javascript
+Copy code
+const myIterable = {
+    items: ['apple', 'banana', 'cherry'],
+    
+    [Symbol.iterator]() {
+        let index = 0;
+        const items = this.items;
+        
+        return {
+            next() {
+                if (index < items.length) {
+                    return { value: items[index++], done: false };
+                } else {
+                    return { done: true };
+                }
+            }
+        };
+    }
+};
+
+for (const fruit of myIterable) {
+    console.log(fruit);
+}
+// Output:
+// apple
+// banana
+// cherry
+In this example, we define a custom iterable object with the Symbol.iterator method, allowing it to be used in a for...of loop.
+
+</details>
+<details> <summary><strong>100. What is the purpose of `console.log()` in JavaScript?</strong></summary> The **`console.log()`** method is used to output messages to the browser's console, typically for debugging purposes.
+Example:
+
+javascript
+Copy code
+const name = 'John';
+console.log('Hello, ' + name); // Output: Hello, John
+In this example, console.log() is used to print a greeting message to the console.
+
+</details>
+
+<details> <summary><strong>101. What is `JSON.stringify()` and `JSON.parse()` in JavaScript?</strong></summary> **`JSON.stringify()`** is used to convert a JavaScript object into a JSON string, while **`JSON.parse()`** is used to convert a JSON string into a JavaScript object.
+Example:
+
+javascript
+Copy code
+const obj = { name: 'John', age: 30 };
+const jsonString = JSON.stringify(obj); // Convert object to JSON string
+console.log(jsonString); // Output: {"name":"John","age":30}
+
+const jsonObject = JSON.parse(jsonString); // Convert JSON string to object
+console.log(jsonObject); // Output: { name: 'John', age: 30 }
+These methods are commonly used when sending data to a server or storing it locally.
+
+</details>
+<details> <summary><strong>102. What is the `localStorage` API in JavaScript?</strong></summary> **`localStorage`** is a web storage API that allows you to store data persistently in the browser. The data is saved across sessions and remains until it is explicitly deleted.
+Example:
+
+javascript
+Copy code
+// Store data
+localStorage.setItem('username', 'JohnDoe');
+
+// Retrieve data
+const username = localStorage.getItem('username');
+console.log(username); // Output: JohnDoe
+
+// Remove data
+localStorage.removeItem('username');
+
+// Clear all data
+localStorage.clear();
+Data stored in localStorage is not cleared when the browser is closed and persists across page reloads.
+
+</details>
+<details> <summary><strong>103. What is the `sessionStorage` API in JavaScript?</strong></summary> **`sessionStorage`** is similar to `localStorage`, but its data is only available for the duration of the page session. Once the page is closed, the data is cleared.
+Example:
+
+javascript
+Copy code
+// Store data
+sessionStorage.setItem('sessionName', 'Rohit');
+
+// Retrieve data
+const sessionName = sessionStorage.getItem('sessionName');
+console.log(sessionName); // Output: Rohit
+
+// Remove data
+sessionStorage.removeItem('sessionName');
+
+// Clear all data
+sessionStorage.clear();
+The data is available only within the same browser tab during the page session.
+
+</details>
+<details> <summary><strong>104. What are JavaScript modules?</strong></summary> JavaScript modules allow you to break up your code into smaller, reusable pieces. You can export functions, variables, or objects from one module and import them into another.
+Example:
+
+javascript
+Copy code
+// In math.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+
+// In app.js
+import { add, subtract } from './math.js';
+
+console.log(add(2, 3)); // Output: 5
+console.log(subtract(5, 3)); // Output: 2
+Modules are typically used to improve code organization and maintainability.
+
+</details>
+<details> <summary><strong>105. What is the `Object.freeze()` method in JavaScript?</strong></summary> The **`Object.freeze()`** method is used to prevent modification of an object's properties. Once an object is frozen, it cannot be changed.
+Example:
+
+javascript
+Copy code
+const person = { name: 'John', age: 30 };
+Object.freeze(person);
+
+person.age = 31; // This will have no effect
+console.log(person.age); // Output: 30
+Freezing an object prevents the addition, removal, or modification of properties.
+
+</details>
+<details> <summary><strong>106. What is `Array.prototype.map()` in JavaScript?</strong></summary> The **`map()`** method creates a new array populated with the results of calling a provided function on every element in the calling array.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // Output: [2, 4, 6, 8]
+It is useful when you need to apply a transformation to each element in an array.
+
+</details>
+<details> <summary><strong>107. What is the `filter()` method in JavaScript?</strong></summary> The **`filter()`** method creates a new array with all elements that pass the test implemented by the provided function.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers); // Output: [2, 4]
+It is commonly used to filter out elements based on specific conditions.
+
+</details>
+<details> <summary><strong>108. Explain the `reduce()` method in JavaScript.</strong></summary> The **`reduce()`** method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+Example:
+
+javascript
+Copy code
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // Output: 10
+In this example, the reduce() method calculates the sum of the numbers in the array.
+
+</details>
+<details> <summary><strong>109. What is the difference between `Object.create()` and `new` keyword in JavaScript?</strong></summary> **`Object.create()`** creates a new object with the specified prototype object and properties, while **`new`** is used to create an instance of a constructor function.
+Example with Object.create():
+
+javascript
+Copy code
+const personPrototype = { greet() { console.log('Hello!'); } };
+const person = Object.create(personPrototype);
+person.greet(); // Output: Hello!
+Example with new:
+
+javascript
+Copy code
+function Person() {
+    this.greet = function() { console.log('Hello!'); };
+}
+const person = new Person();
+person.greet(); // Output: Hello!
+The key difference is that Object.create() is used to create objects with a specific prototype, while new creates an instance of a constructor.
+
+</details>
+<details> <summary><strong>110. What is a "pure function" in JavaScript?</strong></summary> A **pure function** is a function that always produces the same output for the same input and does not cause any side effects (such as modifying external variables).
+Example:
+
+javascript
+Copy code
+function add(a, b) {
+    return a + b;
+}
+console.log(add(2, 3)); // Output: 5
+In this example, add() is a pure function because it does not modify any external state and always returns the same result for the same inputs.
+
+</details>
+
+
